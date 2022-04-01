@@ -1,0 +1,15 @@
+{
+  "name": "3.-todo-list",
+  "version": "1.0.0",
+  "description": "To Do List App",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ewelina Czerwińska",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.21.1",
+    "regenerator-runtime": "^0.13.9"
+  }
+}

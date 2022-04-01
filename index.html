@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<div>
+    <div class="frame">
+        <!-- navigation -->
+        <div class="nav">
+            <div class="date">
+                <div class="date-form">
+                    <div class="date-day">
+                        22
+                    </div>
+                    <div class="date-month-year">
+                        <div class="date-dayname" >Thusday</div>
+                        <div class="date-monthyear" >August 2022</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="search">
+                <div class="input-form">
+                    <input class="input" placeholder="Type your task..." type="text">
+                    <button class="tools-button"><img class="icon" src="/icons/clip.svg" /></button>
+                </div>
+                <div class="search-btn">
+                    <button type="button" class="add-button">ADD</button>
+                </div>
+
+            </div>
+            <div class="week">
+                <div class="week-day-first">MON</div>
+                <div class="week-day">THU</div>
+                <div class="week-day">WED</div>
+                <div class="week-day">THU</div>
+                <div class="week-day">FRI</div>
+                <div class="week-day">SAT</div>
+                <div class="week-day">SUN</div>
+                <div class="week-date">21</div>
+                <div class="week-date date-active">21</div>
+                <div class="week-date">21</div>
+                <div class="week-date">21</div>
+                <div class="week-date">21</div>
+                <div class="week-date">21</div>
+                <div class="week-date">21</div>
+            </div>
+            <div class="toolbar hidden">
+                <div class="toolbar-time">
+                    <div class="time-name">TIME</div>
+
+                    <input class="time-intup" placeholder="00:00" type="text">
+                    <!-- <img class="toolbar-icon" src="icons/time.svg" /> -->
+                    <button class="ok">OK</button>
+
+                </div>
+                <div class="toolbar-categories">
+                    CATEGORY
+                    <div class="categories-icons-palette">
+                        <div class="categories-description"><img class="cat-icon" src="icons/work.svg" />work</div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/study.svg" />study</div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/sport.svg" />sport</div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/shop.svg" />shopping
+                        </div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/cleaning.svg" />clean</div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/eat.svg" />food</div>
+                        <div class="categories-description active"><img class="cat-icon" src="icons/travel.svg" />travel
+                        </div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/repair.svg" />repair</div>
+                        <div class="categories-description"><img class="cat-icon" src="icons/others.svg" />others</div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- ACTIVITIES -->
+        <div class="activity-container">
+            <ul class="activities-list">
+                <li class="activity">
+                    <div><img class="activ-icon-title" src="/icons/shopping.svg" /> </div>
+                    <div class="activ-title-time">
+                        <div class="activ-time">16:33</div>
+                        <div class="activ-title">Shopping with Susan</div>
+                    </div>
+                    <div class="activ-panel">
+                        <div class="tick"><img class="activ-icon" src="icons/tick.svg" /></div>
+                        <div class="edit">EDIT</div>
+                        <div class="cancel"><img class="activ-icon" src="icons/cancel.svg" /></div>
+                    </div>
+                </li>
+
+                <li class="activity">
+                    <div><img class="activ-icon-title" src="/icons/shopping.svg" /> </div>
+                    <div class="activ-title-time">
+                        <div class="activ-time">16:33</div>
+                        <div class="activ-title activ-completed">Shopping with Susan</div>
+                    </div>
+                    <div class="activ-panel">
+                        <div><img class="activ-icon" src="icons/tick.svg" /></div>
+                        <div>EDIT</div>
+                        <div><img class="activ-icon" src="icons/cancel.svg" /></div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="edit-panel hidden">
+                <div>EDIT TASK</div>
+                <div class="edit-time-cat">
+
+                    <div class="edit-task-text">TIME <input class="edit-time" placeholder="00:00"></div>
+                    <div>CATEGORY <select name="edit-category">
+                            <option>work</option>
+                            <option>study</option>
+                            <option>sport</option>
+                            <option>shopping</option>
+                            <option>cleaning</option>
+                            <option>eating</option>
+                            <option>travel</option>
+                            <option>repair</option>
+                            <option>others</option>
+                        </select></div>
+
+                </div>
+                <div class="edit-task-text">
+                    <div>TASK</div>
+                    <input class="edit-input" placeholder="Type your task">
+                </div>
+                <div class="edit-buttons"><button>CONFIRM</button><button>CANCEL</button></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</div>
+<script src="script.js"></script>
+</body>
+
+</html>
