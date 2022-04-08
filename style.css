@@ -174,7 +174,7 @@ body {
 
 .week {
   padding-bottom: 0.4rem;
-  margin-right: 5rem;
+  margin-right: 6rem;
   display: -ms-grid;
   display: grid;
   text-align: center;
@@ -207,14 +207,14 @@ body {
   padding: 1rem;
   top: 14rem;
   right: 5%;
-  background-color: #8f6ddb;
+  background-color: #ffd004;
   height: 19rem;
   width: 14rem;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 1fr 2fr 1fr;
       grid-template-rows: 1fr 2fr 1fr;
-  color: #fff;
+  color: #502564;
 }
 
 .toolbar .toolbar-time {
@@ -276,12 +276,13 @@ body {
   border: none;
   border-radius: 40rem;
   margin-left: 0.6rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
 }
 
 .toolbar .categories-icons-palette {
-  margin-top: 1rem;
+  margin-top: 0.4rem;
   display: -ms-grid;
   display: grid;
   text-align: center;
@@ -293,12 +294,12 @@ body {
   -ms-grid-rows: 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
   gap: 0.2rem;
-  color: #fff;
+  color: #502564;
 }
 
 .toolbar .categories-icons-palette .categories-description {
   font-size: 1rem;
-  color: #fff;
+  color: #502564;
   font-weight: 200;
 }
 
@@ -306,15 +307,16 @@ body {
   display: block;
   margin: auto;
   padding: 0.4rem;
-  width: 70%;
-  height: 70%;
+  width: 2.4rem;
+  height: 2.4rem;
   padding-bottom: 0rem;
-  color: #fff;
+  color: #502564;
 }
 
 .toolbar .categories-icons-palette .active {
-  color: #502564;
-  font-weight: 700;
+  -webkit-filter: brightness(0) saturate(100%) invert(41%) sepia(99%) saturate(3981%) hue-rotate(350deg) brightness(102%) contrast(103%);
+          filter: brightness(0) saturate(100%) invert(41%) sepia(99%) saturate(3981%) hue-rotate(350deg) brightness(102%) contrast(103%);
+  font-weight: 500;
   font-size: 1rem;
 }
 
@@ -583,5 +585,37 @@ button:focus {
 button:active {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
+}
+
+@media (max-width: 38rem) {
+  .frame {
+    background-color: red;
+    margin: auto;
+  }
+}
+
+@media (max-width: 34rem) {
+  .frame {
+    max-width: 100%;
+  }
+  .nav {
+    padding: 1rem 2rem;
+  }
+  .activity-container {
+    padding: 0.8rem 2rem;
+  }
+}
+
+@media (max-width: 28rem) {
+  html {
+    font-size: 80%;
+  }
+  .nav {
+    max-width: 100%;
+  }
+  .activ-icon-title {
+    height: 2.2rem;
+    width: 2.2rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */

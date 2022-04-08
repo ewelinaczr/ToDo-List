@@ -1,3 +1,5 @@
+// const { shift } = require("core-js/core/array");
+
 const ulList = document.querySelector(".activities-list");
 
 // date
@@ -9,35 +11,46 @@ const weekDay = document.querySelectorAll(".week-day");
 const weekDate = document.querySelectorAll(".week-date");
 // inputs
 const inputAdd = document.querySelector(".input");
+const inputEditTime = document.querySelector(".edit-time");
 // const value = inputAdd.value;
 
 // buttons
 const toolbarBtn = document.querySelector(".tools-button");
 const addBtn = document.querySelector(".add-button");
+const confirmBtn = document.querySelector(".confirm");
+const cancelBtn = document.querySelector(".cancel");
 
 //edit panel
 const editPopUp = document.querySelector(".edit-panel");
 const editPopUpInput = document.querySelector(".edit-input");
+const editPopUpTime = document.querySelector(".edit-time");
+
+// Toolbar panel
+const toolbarPanel = document.querySelector(".toolbar");
+const okToolsBtn = document.querySelector(".ok");
+const iconsToolsPanel = document.querySelectorAll(".categories-description");
+const iconsToolsPanelActive = document.querySelectorAll(".active");
+const toolsInput = document.querySelector(".time-intup");
 
 let idNumber = 0;
 let newTask;
 let editedTask;
 
-// DATE SETTINGS
+////// DATE SETTINGS //////
 const date = new Date();
 dayName.textContent = date.toLocaleString("eng", { weekday: "long" });
 today.textContent = date.toLocaleString("eng", { weekday: "short" });
 day.textContent = date.getDate();
-console.log(day);
+// console.log(day);
 dayMonYear.textContent =
   date.toLocaleString("eng", { month: "long" }) + " " + date.getFullYear();
 
-// WEEK SETTING
+////// WEEK SETTING //////
 [...weekDay].forEach(function (el, i) {
   date.setDate(date.getDate() + 1);
   let days = date.toLocaleString("eng", { weekday: "short" });
   el.textContent = days;
-  console.log(el.textContent);
+  // console.log(el.textContent);
 });
 [...weekDate].forEach(function (el, i) {
   let tomorrow = new Date();
@@ -53,11 +66,19 @@ const main = () => {
 const prepereDomEvents = () => {
   addBtn.addEventListener("click", addNewTask);
   inputAdd.addEventListener("keyup", eneterCheck);
+  confirmBtn.addEventListener("click", changeTodo);
+  cancelBtn.addEventListener("click", closePopUp);
+  toolbarBtn.addEventListener("click", showToolbars);
+  okToolsBtn.addEventListener("click", hideToolbars);
+  // toolsInput.addEventListener("keyup", toolssetInput);
 };
 
+//////// ADD NEW TASK //////
 const addNewTask = () => {
   if (inputAdd.value !== "") {
+    // create id
     idNumber++;
+    // create html li - task element
     newTask = document.createElement("li");
     newTask.setAttribute("id", idNumber);
     newTask.classList.add("activity");
@@ -66,12 +87,51 @@ const addNewTask = () => {
     createToolsPanel();
     ulList.appendChild(newTask);
     inputAdd.value = "";
+    toolsInput.value = "";
   }
+  iconsToolsPanel.forEach((el) => el.classList.remove("active"));
+};
+////// TOOLBAR PANEL CONTROL //////
+const showToolbars = () => {
+  toolsInput.value = "";
+  iconsToolsPanel.forEach((el) => el.classList.remove("active"));
+  toolbarPanel.classList.remove("hidden");
+};
+const hideToolbars = () => {
+  toolbarPanel.classList.add("hidden");
+  // iconsToolsPanel.forEach((el) => el.classList.remove("active"));
 };
 
+for (const el of iconsToolsPanel) {
+  // Set active class to div after click
+  const setActive = function (e) {
+    const active = e.target.closest("div");
+    let activeImg = active.firstChild;
+    // console.log(activeImg);
+    iconsToolsPanel.forEach((el) => el.classList.remove("active"));
+    active.classList.add("active");
+  };
+  el.addEventListener("click", setActive);
+}
+// const toolssetInput = function (e) {
+//   const time = toolsInput.value;
+//   console.log(time);
+// };
+// toolssetInput();
+////// CREATE TASK PANEL  //////
 const createiconPanel = () => {
   const iconPanel = document.createElement("div");
-  iconPanel.innerHTML = `<img class="activ-icon-title" src="/icons/shopping.svg" />`;
+  if ([...iconsToolsPanel].some((el) => el.classList.contains("active"))) {
+    let taskIcon = [...iconsToolsPanel].find((el) =>
+      el.classList.contains("active")
+    ).firstChild;
+    console.log(taskIcon);
+    let curIcon = taskIcon.getAttribute("src");
+    console.log(curIcon);
+    iconPanel.innerHTML = `<img class="activ-icon-title" src="/${curIcon}" />`;
+  } else {
+    iconPanel.innerHTML = `<img class="activ-icon-title" src="/icons/others.svg" />`;
+  }
   newTask.appendChild(iconPanel);
 };
 
@@ -81,7 +141,8 @@ const createTimeTitlePanel = () => {
 
   const activTime = document.createElement("div");
   activTime.classList.add("activ-time");
-  activTime.innerHTML = `16:30`;
+
+  activTime.innerHTML = toolsInput.value || "";
 
   const activTitle = document.createElement("div");
   activTitle.classList.add("activ-title");
@@ -122,29 +183,56 @@ const createToolsPanel = () => {
 
   const confirm = function (e) {
     console.log("confirm");
-    const doneTask = e.target.closest("li");
+    const doneTask = e.target.closest("li").id;
     let finishTask = document
       .getElementById(doneTask)
-      .getElementsByClassName("activ-title-time");
+      .getElementsByClassName("activ-title-time")[0].lastChild;
+    finishTask.classList.toggle("activ-completed");
+    // .classList.contains("activ-title");
+
     console.log(finishTask);
   };
+
+  ////// EDIT TASK CONTROL //////
   const edit = function (e) {
-    console.log("edit");
+    // find old task text
     const oldTask = e.target.closest("li").id;
-    // console.log(oldTask);
     editedTask = document
       .getElementById(oldTask)
       .getElementsByClassName("activ-title-time")[0];
-    console.log(editedTask);
     const oldTaskTitle = editedTask.lastChild.firstChild.textContent;
-    // console.log(oldTaskTitle);
+    // Open edit popup and set old task text
     editPopUp.classList.remove("hidden");
     editPopUpInput.value = oldTaskTitle;
+    // find old time
+    let timeTask = document
+      .getElementById(oldTask)
+      .getElementsByClassName("activ-title-time")[0].firstChild.textContent;
+    // console.log(timeTask);
+    editPopUpTime.value = timeTask;
+
+    // timeTask = inputEditTime.value;
   };
 
   completeBtn.addEventListener("click", confirm);
   cancelBtn.addEventListener("click", cancel);
   editBtn.addEventListener("click", edit);
+};
+
+////// EDIT TASK BUTTONS CONTROL //////
+const changeTodo = () => {
+  if (editPopUpInput.value !== "") {
+    editedTask.lastChild.firstChild.textContent = editPopUpInput.value;
+    if (editedTask.firstChild.lastChild)
+      editedTask.firstChild.lastChild.textContent = editPopUpTime.value;
+    editPopUp.classList.add("hidden");
+  } else {
+    editPopUpInput.value = "";
+  }
+};
+
+const closePopUp = () => {
+  editPopUp.classList.add("hidden");
 };
 
 // const checkClick = (e) => {
